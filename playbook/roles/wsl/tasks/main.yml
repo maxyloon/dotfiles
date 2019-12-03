@@ -1,8 +1,11 @@
-- name: test connection
-  ping:
-- debug:
-    var: ansible_kernel
-- apt:
+
+- name: Install packages
+  apt:
     state: present
     pkg:
       - jq
+- name: nvm
+  shell: >
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.1/install.sh | bash
+  args:
+    creates: "{{ ansible_env.HOME }}/.nvm/nvm.sh"
