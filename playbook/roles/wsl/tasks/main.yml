@@ -1,0 +1,8 @@
+- name: test connection
+  ping:
+- debug:
+    var: ansible_kernel
+- apt:
+    state: present
+    pkg:
+      - jq

@@ -1,0 +1,14 @@
+- hosts: localhost
+  gather_facts: true
+  tasks:
+    - name: test connection
+      ping:
+    - debug:
+        var: ansible_kernel
+- hosts: localhost
+  roles:
+     - role: wsl
+       become: true
+       when: 
+         - ansible_facts['os_family'] == 'Debian'
+         - '"Microsoft" in  ansible_kernel'
