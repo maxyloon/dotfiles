@@ -1,0 +1,4 @@
+dotfiles_path: ~/dotfiles
+
+links:
+  - { src: "{{dotfiles_path}}/.ansible/", dest: "~/.ansible/" }

@@ -1,0 +1,23 @@
+---
+
+- name: debug
+  debug: 
+    msg: "{{ links }}"
+# - name: Install links
+#   file:
+#     src: "{{ item.src }}"
+#     dest: "{{ item.dest }}"
+#     owner: maxand
+#     group: maxand
+#     state: link
+#   loop: "{{ links }}"
+
+- name: dd
+  debug:
+    msg: {src: "{{dotfiles_path}}/.ansible"}
+
+- name: install Homebrew
+  command: echo "TODO"
+
+- name: install community galaxy module
+  command: echo "TODO"

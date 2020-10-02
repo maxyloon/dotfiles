@@ -12,3 +12,87 @@
        when: 
          - ansible_facts['os_family'] == 'Debian'
          - '"Microsoft" in  ansible_kernel'
+
+
+- hosts: localhost
+  vars_prompt:
+    - name: mas_email
+      prompt: "What is your Apple ID?"
+      private: no
+
+    - name: mas_password
+      prompt: "What is your password?"
+  vars:
+    - mas_installed_apps: 
+        - { id: 411643860, name: "DaisyDisk (4.3.2)" }
+        - { id: 497799835, name: 'Xcode (12.0.1)'}
+    - homebrew_cask_apps:
+        - font-anonymice-powerline
+        - font-consolas-for-powerline
+        - font-dejavu-sans-mono-for-powerline
+        - font-droid-sans-mono-for-powerline
+        - font-fira-mono-for-powerline
+        - font-inconsolata-dz-for-powerline
+        - font-inconsolata-for-powerline
+        - font-inconsolata-for-powerline-bold
+        - font-inconsolata-g-for-powerline
+        - font-liberation-mono-for-powerline
+        - font-menlo-for-powerline
+        - font-meslo-for-powerline
+        - font-monofur-for-powerline
+        - font-noto-mono-for-powerline
+        - font-powerline-symbols
+        - font-roboto-mono-for-powerline
+        - font-source-code-pro-for-powerline
+        - font-ubuntu-mono-derivative-powerline
+    #    - google-chrome
+    #    - visual-studio-code
+    #    - "0xed"
+    - homebrew_installed_packages:
+      - cocoapods
+      - neovim
+      - pv
+      - jq
+      - fastlane
+      - powerline-go
+      - nvm
+      - svn
+
+    - homebrew_taps:
+      - homebrew/cask-fonts
+      - homebrew/cask
+      - homebrew/core
+  # vars:
+  #   mas_installed_apps:
+  #     - { id: 497799835, name: "Xcode (8.1)" }
+  # command: check if commandline tools are present "xcode-select -p 1>/dev/null;echo $?" 0 if installed else 2
+  tasks:
+  - name: Include the some_role role
+    include_role:
+      name: "{{ item }}"
+    loop:
+      - geerlingguy.homebrew
+      - geerlingguy.mas
+    when: "ansible_facts['os_family'] == 'Darwin'"
+  - name: nvm current
+    command: "nvm current"
+    register: nvm_current
+  - debug:
+      vars: nvm_current 
+
+  # roles:
+  #   - role: rolegeerlingguy.homebrew
+  #     when:
+  #       - ansible_facts['os_family'] == 'Darwin'
+  #   - role: geerlingguy.mas
+  #     when:
+  #       - ansible_facts['os_family'] == 'Darwin'
+  #   - role: macosx
+  #     when:
+  #         - ansible_facts['os_family'] == 'Darwin'
+#Depending on your platform, the user settings file is located here:
+
+# Windows %APPDATA%\Code\User\settings.json
+# macOS $HOME/Library/Application Support/Code/User/settings.json
+# Linux $HOME/.config/Code/User/settings.json
+# The workspace settings file is located under the .vscode folder in your root folder.
