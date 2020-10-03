@@ -1,0 +1,26 @@
+# - debug: var=ansible_facts['user_id']
+# - name: Creates directory
+#   file:
+#     path: "{{kernel_source}}"
+#     state: directory
+#     group: ansible_facts['user_id']
+#     owner: ansible_facts['user_id']
+
+# - name: Unarchive https://github.com/microsoft/WSL2-Linux-Kernel.git
+#   unarchive:
+#     src: https://github.com/microsoft/WSL2-Linux-Kernel/archive/4.19.128-microsoft-standard.tar.gz
+#     dest: "{{kernel_source}}"
+#     remote_src: yes
+
+# - git:
+#     repo: https://github.com/microsoft/WSL2-Linux-Kernel.git
+#     dest: "{{kernel_source}}"
+#     clone: yes
+#     force: yes
+#     version: 4.19.128-microsoft-standard
+
+- name: Get Kernal kernel_source
+  git:
+    repo: https://github.com/microsoft/WSL2-Linux-Kernel.git
+    dest: "{{kernel_source}}"
+    version: 4.19.128-microsoft-standard

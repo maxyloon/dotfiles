@@ -4,13 +4,27 @@
     - name: test connection
       ping:
     - debug:
+        var: ansible_facts['os_family']
+    - debug:
         var: ansible_kernel
+    - debug:
+        var: ansible_python_interpreter
+    - debug:
+        msg: "Need kernel version > 4.19.121 for gpu wsl2 gpu acceleration  {{ ansible_kernel is version('4.19.121', '>=') }}"
+- hosts: windows
+  tasks:
+    - name: Remove Appx packages (and their hindering file assocations)
+      win_shell: |
+        Get-AppxPackage -name "Microsoft.ZuneMusic" | Remove-AppxPackage
+        Get-AppxPackage -name "Microsoft.ZuneVideo" | Remove-AppxPackage
+      
 - hosts: localhost
   roles:
-     - role: wsl
+     - role: wsl2
        become: true
        when: 
          - ansible_facts['os_family'] == 'Debian'
+<<<<<<< HEAD
          - '"Microsoft" in  ansible_kernel'
 
 
@@ -96,3 +110,6 @@
 # macOS $HOME/Library/Application Support/Code/User/settings.json
 # Linux $HOME/.config/Code/User/settings.json
 # The workspace settings file is located under the .vscode folder in your root folder.
+=======
+         - '"microsoft" in  ansible_kernel'
+>>>>>>> 59281e222cbd0117f04e1d36a049ef1db5e5cb1f

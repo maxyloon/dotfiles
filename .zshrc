@@ -123,3 +123,14 @@ load-nvmrc() {
 }
 add-zsh-hook chpwd load-nvmrc
 load-nvmrc
+export VAGRANT_WSL_ENABLE_WINDOWS_ACCESS="1"
+export PATH="$PATH:/mnt/c/Program Files/Oracle/VirtualBox"
+export KUBECONFIG=/mnt/c/Users/maxn9/.kubeconfig
+
+# added by travis gem
+[ -f /home/maxand/.travis/travis.sh ] && source /home/maxand/.travis/travis.sh
+export PATH="${PATH}:${HOME}/.krew/bin"
+
+#export DOCKER_HOST=tcp://localhost:2375
+export PATH=$PATH:/usr/local/go/bin
+export GOPATH=$HOME/go
