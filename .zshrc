@@ -130,6 +130,6 @@ export KUBECONFIG=/mnt/c/Users/maxn9/.kubeconfig
 [ -f /home/maxand/.travis/travis.sh ] && source /home/maxand/.travis/travis.sh
 export PATH="${PATH}:${HOME}/.krew/bin"
 
-export DOCKER_HOST=tcp://localhost:2375
+#export DOCKER_HOST=tcp://localhost:2375
 export PATH=$PATH:/usr/local/go/bin
 export GOPATH=$HOME/go
