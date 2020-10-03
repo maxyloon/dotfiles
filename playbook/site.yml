@@ -24,7 +24,6 @@
        become: true
        when: 
          - ansible_facts['os_family'] == 'Debian'
-<<<<<<< HEAD
          - '"Microsoft" in  ansible_kernel'
 
 
@@ -62,6 +61,12 @@
         - google-chrome
         - visual-studio-code
         - "0xed"
+        - iterm2
+        - spectacle
+        - alfred
+        - istat-menus
+        - hyperswitch
+
     - homebrew_installed_packages:
       - cocoapods
       - neovim
@@ -71,6 +76,9 @@
       - powerline-go
       - nvm
       - svn
+      - fortune
+      - cowsay
+
 
     - homebrew_taps:
       - homebrew/cask-fonts
@@ -88,11 +96,12 @@
       - geerlingguy.homebrew
       - geerlingguy.mas
     when: "ansible_facts['os_family'] == 'Darwin'"
-  - name: nvm current
-    command: "nvm current"
-    register: nvm_current
-  - debug:
-      vars: nvm_current 
+
+  # - name: nvm current
+  #   command: "nvm current"
+  #   register: nvm_current
+  # - debug:
+  #     vars: nvm_current 
 
   # roles:
   #   - role: rolegeerlingguy.homebrew
@@ -110,6 +119,3 @@
 # macOS $HOME/Library/Application Support/Code/User/settings.json
 # Linux $HOME/.config/Code/User/settings.json
 # The workspace settings file is located under the .vscode folder in your root folder.
-=======
-         - '"microsoft" in  ansible_kernel'
->>>>>>> 59281e222cbd0117f04e1d36a049ef1db5e5cb1f
