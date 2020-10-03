@@ -66,6 +66,7 @@
         - alfred
         - istat-menus
         - hyperswitch
+        - android-studio 
 
     - homebrew_installed_packages:
       - cocoapods
