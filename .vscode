@@ -11,5 +11,5 @@
     "editor.renderWhitespace": "all",
     "editor.acceptSuggestionOnEnter": "off"
   }
-  "terminal.integrated.fontFamily": "Menlo for Powerline"
+  "terminal.integrated.fontFamily": "DejaVu Sans Mono for Powerline"
 }

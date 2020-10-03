@@ -45,9 +45,9 @@
         - font-roboto-mono-for-powerline
         - font-source-code-pro-for-powerline
         - font-ubuntu-mono-derivative-powerline
-    #    - google-chrome
-    #    - visual-studio-code
-    #    - "0xed"
+        - google-chrome
+        - visual-studio-code
+        - "0xed"
     - homebrew_installed_packages:
       - cocoapods
       - neovim
