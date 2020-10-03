@@ -11,7 +11,12 @@
         var: ansible_python_interpreter
     - debug:
         msg: "Need kernel version > 4.19.121 for gpu wsl2 gpu acceleration  {{ ansible_kernel is version('4.19.121', '>=') }}"
-
+- hosts: windows
+  tasks:
+    - name: Remove Appx packages (and their hindering file assocations)
+      win_shell: |
+        Get-AppxPackage -name "Microsoft.ZuneMusic" | Remove-AppxPackage
+        Get-AppxPackage -name "Microsoft.ZuneVideo" | Remove-AppxPackage
       
 - hosts: localhost
   roles:
