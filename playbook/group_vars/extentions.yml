@@ -1,4 +1,4 @@
-vscode-extentions:
+vscode_extentions:
   - alexcvzz.vscode-sqlite
   - andys8.jest-snippets
   - apollographql.vscode-apollo
