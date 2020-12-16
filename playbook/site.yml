@@ -38,7 +38,12 @@
   vars:
     - mas_installed_apps: 
         - { id: 411643860, name: "DaisyDisk (4.3.2)" }
-        - { id: 497799835, name: 'Xcode (12.0.1)'}
+        - { id: 585829637, name: "Todoist: To-Do List & Tasks (7.5)"}
+        - { id: 450527929, name: "djay - DJ App & AI Mixer       (3.6)"}
+        - { id: 1278508951, name: "Trello" }
+        - { id: 803453959, name:  "Slack"}
+#        - { id: 1333542190, name:  "1Password 7 - Password Manager" }
+#        - { id: 497799835, name: 'Xcode (12.0.1)'}
     - homebrew_cask_apps:
         # - font-anonymice-powerline
         # - font-consolas-for-powerline
@@ -50,7 +55,7 @@
         # - font-inconsolata-for-powerline-bold
         # - font-inconsolata-g-for-powerline
         # - font-liberation-mono-for-powerline
-        # - font-menlo-for-powerline
+        - font-menlo-for-powerline
         # - font-meslo-for-powerline
         # - font-monofur-for-powerline
         # - font-noto-mono-for-powerline
@@ -60,13 +65,19 @@
         # - font-ubuntu-mono-derivative-powerline
         - google-chrome
         - visual-studio-code
-        - "0xed"
+#        - "0xed"
         - iterm2
         - spectacle
         - alfred
-        - istat-menus
+#        - istat-menus
         - hyperswitch
         - paintcode
+        - docker
+        - lens
+        - 1password-cli
+        - zoom
+        - spotify
+        - 1password
 
     - homebrew_installed_packages:
       - cocoapods
@@ -79,18 +90,29 @@
       - svn
       - fortune
       - cowsay
+      - gh
 
 
     - homebrew_taps:
       - homebrew/cask-fonts
       - homebrew/cask
       - homebrew/core
-
   # vars:
   #   mas_installed_apps:
   #     - { id: 497799835, name: "Xcode (8.1)" }
   # command: check if commandline tools are present "xcode-select -p 1>/dev/null;echo $?" 0 if installed else 2
   tasks:
+    - name: Symlinks
+      file: 
+        src: '{{ item.src }}'
+        dest: '{{ item.dest }}'
+        state: link
+      with_items:
+#       - { src: "~/dotfiles/.ansible", dest: "~/.ansible" }
+       - { src: "~/dotfiles/.oh-my-zsh", dest: "~/.oh-my-zsh" }
+       - { src: "~/dotfiles/.zshrc", dest: "~/.zshrc" }
+       - { src: "~/dotfiles/.vscode", dest: "~/Library/Application Support/Code/User/settings.json"}
+
     - name: Include the some_role role
       include_role:
         name: "{{ item }}"
@@ -124,4 +146,4 @@
 # Windows %APPDATA%\Code\User\settings.json
 # macOS $HOME/Library/Application Support/Code/User/settings.json
 # Linux $HOME/.config/Code/User/settings.json
-# The workspace settings file is located under the .vscode folder in your root folder.
+# The workspaqce settings file is located under the .vscode folder in your root folder.
