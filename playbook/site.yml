@@ -42,6 +42,7 @@
         - { id: 450527929, name: "djay - DJ App & AI Mixer       (3.6)"}
         - { id: 1278508951, name: "Trello" }
         - { id: 803453959, name:  "Slack"}
+        - { id:  1147396723,  name: "WhatsApp Desktop"}
 #        - { id: 1333542190, name:  "1Password 7 - Password Manager" }
 #        - { id: 497799835, name: 'Xcode (12.0.1)'}
     - homebrew_cask_apps:
@@ -78,6 +79,8 @@
         - zoom
         - spotify
         - 1password
+        - vlc
+        - private-internet-access
 
     - homebrew_installed_packages:
       - cocoapods
