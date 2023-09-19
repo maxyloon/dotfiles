@@ -125,12 +125,59 @@ add-zsh-hook chpwd load-nvmrc
 load-nvmrc
 export VAGRANT_WSL_ENABLE_WINDOWS_ACCESS="1"
 export PATH="$PATH:/mnt/c/Program Files/Oracle/VirtualBox"
-export KUBECONFIG=/mnt/c/Users/maxn9/.kubeconfig
+#export KUBECONFIG=/mnt/c/Users/maxn9/.kubeconfig
 
 # added by travis gem
 [ -f /home/maxand/.travis/travis.sh ] && source /home/maxand/.travis/travis.sh
 export PATH="${PATH}:${HOME}/.krew/bin"
 
 #export DOCKER_HOST=tcp://localhost:2375
-export PATH=$PATH:/usr/local/go/bin
+export PATH=$PATH:/usr/local/go/bin:/Users/maxand/bin
 export GOPATH=$HOME/go
+export PATH="$PATH:$(go env GOPATH)/bin"
+export PATH="$PATH:/Users/maxand/code/istio-1.8.1/bin"
+#export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
+#export PATH=${JAVA_HOME}/bin:$PATH
+export PATH="$PATH:/Users/maxand/flutter/bin"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export PATH="/usr/local/sbin:$PATH"
+
+  # Set Spaceship ZSH as a prompt
+  #autoload -U promptinit; promptinit
+  #prompt spaceship
+alias k=kubectl
+alias n=nvim
+  . /usr/local/etc/profile.d/z.sh
+export PATH="/usr/local/opt/openjdk@11/bin:$PATH"
+export PATH="$HOME/.jenv/bin:$PATH"
+eval "$(jenv init -)"
+export PATH="/usr/local/opt/openjdk/bin:$PATH"
+eval "$(pyenv init -)"
+export PATH="$PATH":"$HOME/.pub-cache/bin"
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/Users/maxand/opt/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/Users/maxand/opt/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/Users/maxand/opt/anaconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/Users/maxand/opt/anaconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
+PATH="/usr/local/opt/make/libexec/gnubin:$PATH"
+export LANG="en_US.UTF-8"
+
+# pnpm
+export PNPM_HOME="/Users/maxand/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
