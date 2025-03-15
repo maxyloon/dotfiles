@@ -1,0 +1,75 @@
+variant: fcos
+version: 1.6.0
+ignition:
+  config:
+    replace:
+      source: "http://192.168.1.167/config.ign"
+
+kernel_arguments:
+  should_exist:
+    - "intel_iommu=on"
+    - "iommu=pt"
+    - "intremap=no_x2apic_optout"
+
+storage:
+  files:
+    - path: /etc/modules-load.d/kvm.conf
+      mode: 0644
+      contents:
+        inline: |
+          kvm
+          kvm_intel  
+          vfio
+          vfio_pci
+          vfio_virqfd
+    - path: /etc/modprobe.d/blacklist-nvidia.conf
+      mode: 0644
+      contents:
+        inline: |
+          blacklist nouveau
+          blacklist nvidia
+          blacklist nvidia_drm
+          blacklist nvidia_modeset
+          blacklist nvidia_uvm
+
+    - path: /etc/modprobe.d/vfio.conf
+      mode: 0644
+      contents:
+        inline: |
+          options vfio-pci ids=10de:1b81,10de:10f0
+
+    - path: /etc/modules-load.d/vfio.conf
+      mode: 0644
+      contents:
+        inline: |
+          vfio
+          vfio_iommu_type1
+          vfio_pci
+          vfio_virqfd
+
+systemd:
+  units:
+    - name: kubevirt-gpu-passthrough.service
+      enabled: true
+      contents: |
+        [Unit]
+        Description=Setup GPU Passthrough for KubeVirt
+        After=network.target
+        Wants=systemd-udev-settle.service
+        Before=kubevirt-install.service
+
+        [Service]
+        Type=oneshot
+        ExecStart=/usr/sbin/modprobe vfio-pci
+        ExecStart=/bin/sh -c 'echo 0000:01:00.0 > /sys/bus/pci/devices/0000:01:00.0/remove'
+        ExecStart=/bin/sh -c 'echo 0000:01:00.1 > /sys/bus/pci/devices/0000:01:00.1/remove'
+        ExecStart=/bin/sh -c 'echo 1 > /sys/bus/pci/rescan'
+
+        [Install]
+        WantedBy=multi-user.target
+
+passwd:
+  users:
+    - name: core
+      ssh_authorized_keys:
+        - "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDLraKTM46c4CgHp8h/cMLPLkycNjAzrxgRUgEY282Jk3CgNGIHIivpuh4v689qwFA/MdGixV52jcFTtOfUFQEy3bkE4tkr752mrSIVHnPnTi3QKDm3j+3e8FUhA0Lhk/MPsyLq8fnu4NY9IT+Mizs7oKmDFY7eT4O24CyzsgPPLEfw/Y6RtU0mw2wgsL38UmJFiuurw9K/kVdU3WJwJmjklGIXbIdZ7IDOHbn91q0MvEXEZ/ijc8dCKc054kh7pTJTLIH8nW10afae8AzCBCCgZcapyJdkUJKhHVO8HzYwDIcYKy9Ixx6WevXN89VNCtRsToUM4MD3lg5nfRbTKR+//tA8Eql5ZKNsXm9esXehWLu1obG85QMNZciugK8OK04PSrNuVNWMg2WYLj6JN2v+sHjW0Vn2ngc/j7iFDUXNr6Br6vskmP/uHm+6dfFmw//ZjCWfVDr1WvYmtwpzf6RfYvJD1/z/vFDXwCFavzwF826wXjuhYp3o9aMujSn09uU= maxand@mediapi"

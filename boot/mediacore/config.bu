@@ -1,0 +1,23 @@
+variant: fcos
+version: 1.6.0
+storage:
+  disks:
+    - device: /dev/disk/by-id/wwn-0x5000c500e3561fd5
+      wipe_table: true 
+      partitions:
+        - label: "LVM"
+          number: 1
+          size_mib: 0
+          start_mib: 0
+  files:
+    - path: /etc/hostname
+      mode: 0644
+      contents:
+        inline: mediacore
+      
+passwd:
+  users:
+    - name: core
+      ssh_authorized_keys:
+        - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDLraKTM46c4CgHp8h/cMLPLkycNjAzrxgRUgEY282Jk3CgNGIHIivpuh4v689qwFA/MdGixV52jcFTtOfUFQEy3bkE4tkr752mrSIVHnPnTi3QKDm3j+3e8FUhA0Lhk/MPsyLq8fnu4NY9IT+Mizs7oKmDFY7eT4O24CyzsgPPLEfw/Y6RtU0mw2wgsL38UmJFiuurw9K/kVdU3WJwJmjklGIXbIdZ7IDOHbn91q0MvEXEZ/ijc8dCKc054kh7pTJTLIH8nW10afae8AzCBCCgZcapyJdkUJKhHVO8HzYwDIcYKy9Ixx6WevXN89VNCtRsToUM4MD3lg5nfRbTKR+//tA8Eql5ZKNsXm9esXehWLu1obG85QMNZciugK8OK04PSrNuVNWMg2WYLj6JN2v+sHjW0Vn2ngc/j7iFDUXNr6Br6vskmP/uHm+6dfFmw//ZjCWfVDr1WvYmtwpzf6RfYvJD1/z/vFDXwCFavzwF826wXjuhYp3o9aMujSn09uU= maxand@mediapi
+        - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIE3UBG0GH8zhxscqWlNH9bCwrPpGWUeEqIHflqleMaTH maxn90@gmail.com
